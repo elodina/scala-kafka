@@ -15,16 +15,44 @@
  * limitations under the License.
  */
 
- package ly.stealth.testing
+package ly.stealth.testing
 
 import org.specs2.mutable._
+import java.util.UUID
+import kafka.consumer._
+import kafka.producer._
+import kafka.utils._
 
-class StubSpec extends Specification {
+class KafkaSpec extends Specification with Logging {
 	
-	"StubSpec" should {
-		
-		"stub" in {
-			true must beTrue			
-		}
-	}
+  val testMessage = UUID.randomUUID().toString
+  val testTopic = UUID.randomUUID().toString
+
+  "Sample" should {
+    "send string to broker and consume that string back" in {
+
+      var testStatus = false
+
+      info("starting sample broker testing")
+      val producer = new KafkaProducer(testTopic,"192.168.86.10:9092")
+      producer.sendString(testMessage)
+
+
+      val consumer = new KafkaConsumer(testTopic,"groupId","192.168.86.5:2181")
+
+      def exec(binaryObject: Array[Byte]) = {
+        val message = new String(binaryObject)
+        info("testMessage = " + testMessage + " and consumed message = " + message)
+        testMessage must_== message
+        consumer.close()
+        testStatus = true
+      }
+
+      info("KafkaSpec is waiting some seconds")
+      consumer.read(exec)
+      info("KafkaSpec consumed")
+      
+      testStatus must beTrue // we need to get to this point but a failure in exec will fail the test
+    }
+  }
 }
