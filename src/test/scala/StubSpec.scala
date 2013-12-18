@@ -116,9 +116,13 @@ class KafkaSpec extends Specification with Logging {
       info("starting akka producertesting")
       val system = ActorSystem("testing")
 
-      val producer = system.actorOf(Props[KafkaAkkaProducer].withRouter(RoundRobinRouter(1)), "router")
+      val actorCount = 1
 
-      producer ! (testTopic,"192.168.86.10:9092")
+      val producer = system.actorOf(Props[KafkaAkkaProducer].withRouter(RoundRobinRouter(actorCount)), "router")
+
+      1 to actorCount foreach { i =>(
+        producer ! (testTopic,"192.168.86.10:9092"))
+      }
 
       producer ! testMessage
 
