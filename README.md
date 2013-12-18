@@ -11,11 +11,11 @@ Use Vagrant to get up and running.
 In the main kafka folder  
 
 1) vagrant up  
-2) 1) ./sbt test  
+2) ./sbt test  
 
 once this is done 
-* Zookeeper will be running 192.168.50.5
-* Broker 1 on 192.168.50.10
+* Zookeeper will be running 192.168.86.5
+* Broker 1 on 192.168.86.10
 * All the tests in src/test/scala/* should pass  
 
 If you want you can login to the machines using vagrant ssh <machineName> but you don't need to.
@@ -24,7 +24,7 @@ You can access the brokers and zookeeper by their IP from your local without hav
 
 e.g.
 
-bin/kafka-console-producer.sh --broker-list 192.168.50.10:9092 --topic <get his from the random topic created in test>
+bin/kafka-console-producer.sh --broker-list 192.168.86.10:9092 --topic <get his from the random topic created in test>
 
-bin/kafka-console-consumer.sh --zookeeper 192.168.50.5:2181 --topic <get his from the random topic created in test> --from-beginning
+bin/kafka-console-consumer.sh --zookeeper 192.168.86.5:2181 --topic <get his from the random topic created in test> --from-beginning
 
