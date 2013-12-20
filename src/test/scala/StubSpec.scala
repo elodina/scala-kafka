@@ -32,7 +32,7 @@ class KafkaSpec extends Specification with Logging {
   "Simple Producer and Consumer" should {
     "send string to broker and consume that string back" in {
       val testMessage = UUID.randomUUID().toString
-      val testTopic = UUID.randomUUID().toString
+      val testTopic = "test-(?!bad\\b)[\\w]+" //UUID.randomUUID().toString
       val groupId_1 = UUID.randomUUID().toString
 
       var testStatus = false

@@ -33,16 +33,20 @@ exitscript()
 echo "cd /tmp"
 cd /tmp
 
-echo "wget https://archive.apache.org/dist/kafka/0.8.0/kafka_2.8.0-0.8.0.tar.gz"
-wget https://archive.apache.org/dist/kafka/0.8.0/kafka_2.8.0-0.8.0.tar.gz
+archive="kafka_2.8.0-0.8.0.1-KAFKA-1180"
 
-echo "tar -xvf kafka_2.8.0-0.8.0.tar.gz"
-tar -xvf kafka_2.8.0-0.8.0.tar.gz
+#echo "wget https://archive.apache.org/dist/kafka/0.8.0/kafka_2.8.0-0.8.0.tar.gz"
+#wget https://archive.apache.org/dist/kafka/0.8.0/kafka_2.8.0-0.8.0.tar.gz
+echo "wget http://people.apache.org/~joestein/KAFKA-1180/$archive.tar.gz"
+wget http://people.apache.org/~joestein/KAFKA-1180/$archive.tar.gz
+
+echo "tar -xvf $archive.tar.gz"
+tar -xvf $archive.tar.gz
 
 echo "mkdir -p /opt/apache"
 mkdir -p /opt/apache
 
-echo "mv kafka_2.8.0-0.8.0 /opt/apache"
-mv kafka_2.8.0-0.8.0 /opt/apache
+echo "mv $archive /opt/apache/kafka"
+mv $archive /opt/apache/kafka
 
 exitscript

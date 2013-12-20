@@ -23,4 +23,4 @@ apt-get -y install oracle-java7-installer oracle-java7-set-default
 
 /vagrant/vagrant/kafka.sh #install kafka
 
-/opt/apache/kafka_2.8.0-0.8.0/bin/zookeeper-server-start.sh /opt/apache/kafka_2.8.0-0.8.0/config/zookeeper.properties 1>> /tmp/zk.log 2>> /tmp/zk.log &
+/opt/apache/kafka/bin/zookeeper-server-start.sh /opt/apache/kafka/config/zookeeper.properties 1>> /tmp/zk.log 2>> /tmp/zk.log &
