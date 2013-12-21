@@ -33,7 +33,7 @@ exitscript()
 echo "cd /tmp"
 cd /tmp
 
-archive="kafka_2.8.0-0.8.0.1-KAFKA-1180"
+archive="kafka_2.8.0-0.8.0.1_KAFKA-1180v2"
 
 #echo "wget https://archive.apache.org/dist/kafka/0.8.0/kafka_2.8.0-0.8.0.tar.gz"
 #wget https://archive.apache.org/dist/kafka/0.8.0/kafka_2.8.0-0.8.0.tar.gz

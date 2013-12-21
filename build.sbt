@@ -14,7 +14,7 @@ resolvers += "Apache Staging" at "https://repository.apache.org/content/groups/s
 libraryDependencies ++= Seq(
   "org.specs2" %% "specs2" % "2.2.2" % "test",
   "com.datastax.cassandra" % "cassandra-driver-core" % "1.0.3",
-  "org.apache.kafka" % "kafka_2.10" % "0.8.0.1_KAFKA-1180",
+  "org.apache.kafka" % "kafka_2.10" % "0.8.0.1_KAFKA-1180v2",
   "org.apache.avro" % "avro" % "1.7.5",
   "play" %% "play-json" % "2.2-SNAPSHOT" from "https://github.com/mandubian/mandubian-mvn/raw/master/snapshots",
   "com.github.scopt" %% "scopt" % "3.1.0",
