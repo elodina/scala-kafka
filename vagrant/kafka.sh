@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#!/bin/sh -Eu
+#!/bin/sh -Eux
 
 #  Trap non-normal exit signals: 1/HUP, 2/INT, 3/QUIT, 15/TERM, ERR
 trap founderror 1 2 3 15 ERR
@@ -30,19 +30,10 @@ exitscript()
         exit 0
 }
 
-echo "cd /tmp"
 cd /tmp
-
-echo "wget https://archive.apache.org/dist/kafka/0.8.0/kafka_2.8.0-0.8.0.tar.gz"
 wget https://archive.apache.org/dist/kafka/0.8.0/kafka_2.8.0-0.8.0.tar.gz
-
-echo "tar -xvf kafka_2.8.0-0.8.0.tar.gz"
 tar -xvf kafka_2.8.0-0.8.0.tar.gz
-
-echo "mkdir -p /opt/apache"
 mkdir -p /opt/apache
-
-echo "mv kafka_2.8.0-0.8.0 /opt/apache"
 mv kafka_2.8.0-0.8.0 /opt/apache
 
 exitscript

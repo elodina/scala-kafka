@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#!/bin/bash
+#!/bin/bash -x
 apt-get -y update
 apt-get install -y software-properties-common python-software-properties
 add-apt-repository -y ppa:webupd8team/java
