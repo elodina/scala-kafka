@@ -93,9 +93,11 @@ case class KafkaProducer(
 
   val producer = new Producer[AnyRef, AnyRef](new ProducerConfig(props))
 
-  def sendString(message: String) = {
+  def send(message: String): Unit = send(message.getBytes("UTF8"))
+
+  def send(message: Array[Byte]): Unit = {
     try {
-      producer.send(new KeyedMessage(topic,message.getBytes("UTF8")))
+      producer.send(new KeyedMessage(topic,message))
     } catch {
       case e: Exception =>
         e.printStackTrace

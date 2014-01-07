@@ -39,7 +39,7 @@ class KafkaSpec extends Specification with Logging {
 
       info("starting sample broker testing")
       val producer = new KafkaProducer(testTopic,"192.168.86.10:9092")
-      producer.sendString(testMessage)
+      producer.send(testMessage)
 
       val consumer = new KafkaConsumer(testTopic,groupId_1,"192.168.86.5:2181")
 
@@ -69,7 +69,7 @@ class KafkaSpec extends Specification with Logging {
 
       info("starting sample broker testing")
       val producer = new KafkaProducer(testTopic,"192.168.86.10:9092")
-      producer.sendString(testMessage)
+      producer.send(testMessage)
 
       val consumer1 = new KafkaConsumer(testTopic,groupId_1,"192.168.86.5:2181")
 

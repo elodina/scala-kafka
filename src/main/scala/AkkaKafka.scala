@@ -46,7 +46,7 @@ class KafkaAkkaProducer extends Actor with Logging {
       }
     case msg: String ⇒
       {
-        producer.sendString(msg)
+        producer.send(msg)
       }
   }
 }
