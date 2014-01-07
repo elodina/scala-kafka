@@ -95,7 +95,7 @@ case class KafkaProducer(
 
   def sendString(message: String) = {
     try {
-      producer.send(new KeyedMessage(topic,message.getBytes))
+      producer.send(new KeyedMessage(topic,message.getBytes("UTF8")))
     } catch {
       case e: Exception =>
         e.printStackTrace
