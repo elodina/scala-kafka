@@ -33,4 +33,4 @@ sed 's/zookeeper.connect=localhost:2181/'zookeeper.connect=192.168.86.5:2181'/' 
 
 /vagrant/vagrant/kafka.sh #install kafka
 
-/opt/apache/kafka_2.8.0-0.8.0/bin/kafka-server-start.sh /opt/server.properties 1>> /tmp/broker.log 2>> /tmp/broker.log &
+/opt/apache/kafka_2.8.0-0.8.1/bin/kafka-server-start.sh /opt/server.properties 1>> /tmp/broker.log 2>> /tmp/broker.log &
