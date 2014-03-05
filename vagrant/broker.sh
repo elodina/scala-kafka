@@ -19,7 +19,7 @@ apt-get install -y software-properties-common python-software-properties
 add-apt-repository -y ppa:webupd8team/java
 apt-get -y update
 /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-apt-get -y install oracle-java7-installer oracle-java7-set-default
+apt-get -y install oracle-java6-installer oracle-java6-set-default
 
 chmod a+rw /opt
 cd /opt
@@ -33,4 +33,4 @@ sed 's/zookeeper.connect=localhost:2181/'zookeeper.connect=192.168.86.5:2181'/' 
 
 /vagrant/vagrant/kafka.sh #install kafka
 
-/opt/apache/kafka_2.8.0-0.8.1/bin/kafka-server-start.sh /opt/server.properties 1>> /tmp/broker.log 2>> /tmp/broker.log &
+/opt/apache/kafka/bin/kafka-server-start.sh /opt/server.properties 1>> /tmp/broker.log 2>> /tmp/broker.log &

@@ -32,11 +32,13 @@ exitscript()
 
 mkdir -p /opt/apache
 cd /opt/apache
-wget http://people.apache.org/~joestein/kafka-0.8.1-candidate1/kafka_2.8.0-0.8.1.tgz #https://archive.apache.org/dist/kafka/0.8.0/kafka_2.8.0-0.8.0.tar.gz
-mkdir -p /opt/apache/kafka_2.8.0-0.8.1
-chmod a+rw /opt/apache/kafka_2.8.0-0.8.1
-cd kafka_2.8.0-0.8.1
-tar -xvf ../kafka_2.8.0-0.8.1.tgz
-cd /opt/apache
-ln -s /opt/apache/kafka_2.8.0-0.8.1 kafka
+version=0.8.1
+scala=2.10
+release=kafka_$scala-$version
+
+#wget #https://archive.apache.org/dist/kafka/$version/$release.tgz
+wget https://people.apache.org/~joestein/$release-candidate2/$release.tgz
+tar -xvf $release.tgz
+/vagrant/scripts/verify.sh $release.tgz
+ln -s /opt/apache/$release kafka
 exitscript
