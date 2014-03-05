@@ -30,10 +30,10 @@ exitscript()
         exit 0
 }
 
-release=kafka-0.8.1
+release=$1
 
-gpg --verify $release-src.tgz.asc $release-src.tgz
+gpg --verify $release.tgz.asc $release
 
-/vagrant/vagrant/verify_hash.sh $release-src.tgz MD5 md5
-/vagrant/vagrant/verify_hash.sh $release-src.tgz SHA1 sh1
-/vagrant/vagrant/verify_hash.sh $release-src.tgz SHA256 sh2
+/vagrant/vagrant/verify_hash.sh $release MD5 md5
+/vagrant/vagrant/verify_hash.sh $release SHA1 sh1
+/vagrant/vagrant/verify_hash.sh $release SHA256 sh2
