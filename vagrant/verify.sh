@@ -30,20 +30,10 @@ exitscript()
         exit 0
 }
 
-mkdir -p /opt/apache
-cd /opt/apache
-version=0.8.1
-scala=2.10
-release=kafka_$scala-$version
+release=$1
 
-#wget #https://archive.apache.org/dist/kafka/$version/$release.tgz
-url=people.apache.org/~joestein
-wget https://$url/kafka-$version-candidate2/$release.tgz
-wget https://$url/kafka-$version-candidate2/$release.tgz.md5
-wget https://$url/kafka-$version-candidate2/$release.tgz.sh1
-wget https://$url/kafka-$version-candidate2/$release.tgz.sh2
-wget https://$url/kafka-$version-candidate2/$release.tgz.asc
-tar -xvf $release.tgz
-/vagrant/vagrant/verify.sh $release.tgz
-ln -s /opt/apache/$release kafka
-exitscript
+#gpg --verify $release.asc $release
+
+/vagrant/vagrant/verify_hash.sh $release MD5 md5
+/vagrant/vagrant/verify_hash.sh $release SHA1 sh1
+/vagrant/vagrant/verify_hash.sh $release SHA256 sh2

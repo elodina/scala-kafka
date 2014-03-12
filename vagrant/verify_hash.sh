@@ -30,20 +30,11 @@ exitscript()
         exit 0
 }
 
-mkdir -p /opt/apache
-cd /opt/apache
-version=0.8.1
-scala=2.10
-release=kafka_$scala-$version
-
-#wget #https://archive.apache.org/dist/kafka/$version/$release.tgz
-url=people.apache.org/~joestein
-wget https://$url/kafka-$version-candidate2/$release.tgz
-wget https://$url/kafka-$version-candidate2/$release.tgz.md5
-wget https://$url/kafka-$version-candidate2/$release.tgz.sh1
-wget https://$url/kafka-$version-candidate2/$release.tgz.sh2
-wget https://$url/kafka-$version-candidate2/$release.tgz.asc
-tar -xvf $release.tgz
-/vagrant/vagrant/verify.sh $release.tgz
-ln -s /opt/apache/$release kafka
-exitscript
+hs=$(gpg --print-md $2 $1)
+hf=$(cat $1.$3)
+if [ "$hs" == "$hf" ]; then
+  echo "$2 ok"
+else
+  echo "error $hs != $hf"
+  founderror
+fi
