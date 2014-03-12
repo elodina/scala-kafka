@@ -9,8 +9,6 @@ mainClass := Some("Stub")
 
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 
-resolvers += "Apache Staging" at "https://repository.apache.org/content/groups/staging/"
-
 libraryDependencies ++= Seq(
   "org.specs2" %% "specs2" % "2.2.2" % "test",
   "org.apache.kafka" % "kafka_2.10" % "0.8.1" intransitive(),

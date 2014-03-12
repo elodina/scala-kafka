@@ -32,7 +32,7 @@ exitscript()
 
 release=$1
 
-gpg --verify $release.tgz.asc $release
+#gpg --verify $release.asc $release
 
 /vagrant/vagrant/verify_hash.sh $release MD5 md5
 /vagrant/vagrant/verify_hash.sh $release SHA1 sh1
