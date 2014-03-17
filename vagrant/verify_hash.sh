@@ -38,3 +38,5 @@ else
   echo "error $hs != $hf"
   founderror
 fi
+
+exitscript

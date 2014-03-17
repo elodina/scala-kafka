@@ -13,7 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#!/bin/bash -x
+#!/bin/sh -Eux
+
+#  Trap non-normal exit signals: 1/HUP, 2/INT, 3/QUIT, 15/TERM, ERR
+trap founderror 1 2 3 15 ERR
+
+founderror()
+{
+        exit 1
+}
+
+exitscript()
+{
+        #remove lock file
+        #rm $lockfile
+        exit 0
+}
+
 apt-get -y update
 apt-get install -y software-properties-common python-software-properties
 add-apt-repository -y ppa:webupd8team/java
@@ -34,3 +50,5 @@ sed 's/zookeeper.connect=localhost:2181/'zookeeper.connect=192.168.86.5:2181'/' 
 /vagrant/vagrant/kafka.sh #install kafka
 
 /opt/apache/kafka/bin/kafka-server-start.sh /opt/server.properties 1>> /tmp/broker.log 2>> /tmp/broker.log &
+
+exitscript

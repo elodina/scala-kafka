@@ -37,3 +37,5 @@ release=$1
 /vagrant/vagrant/verify_hash.sh $release MD5 md5
 /vagrant/vagrant/verify_hash.sh $release SHA1 sh1
 /vagrant/vagrant/verify_hash.sh $release SHA256 sh2
+
+exitscript

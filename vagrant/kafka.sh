@@ -36,13 +36,12 @@ version=0.8.1
 scala=2.10
 release=kafka_$scala-$version
 
-#wget #https://archive.apache.org/dist/kafka/$version/$release.tgz
-url=people.apache.org/~joestein
-wget https://$url/kafka-$version-candidate2/$release.tgz
-wget https://$url/kafka-$version-candidate2/$release.tgz.md5
-wget https://$url/kafka-$version-candidate2/$release.tgz.sh1
-wget https://$url/kafka-$version-candidate2/$release.tgz.sh2
-wget https://$url/kafka-$version-candidate2/$release.tgz.asc
+url=archive.apache.org/dist/kafka
+wget https://$url/$version/$release.tgz
+wget https://$url/$version/$release.tgz.md5
+wget https://$url/$version/$release.tgz.sh1
+wget https://$url/$version/$release.tgz.sh2
+wget https://$url/$version/$release.tgz.asc
 tar -xvf $release.tgz
 /vagrant/vagrant/verify.sh $release.tgz
 ln -s /opt/apache/$release kafka
