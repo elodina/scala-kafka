@@ -11,7 +11,7 @@ Use Vagrant to get up and running.
 In the main kafka folder  
 
 1) vagrant up  
-2) ./sbt test  
+2) ./gradlew test
 
 once this is done 
 * Zookeeper will be running 192.168.86.5
