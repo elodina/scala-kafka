@@ -1,6 +1,8 @@
+.idea/*
 *.class
 *.log
 .vagrant
+.gradle
 # sbt specific
 dist/*
 target/
