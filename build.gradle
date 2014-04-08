@@ -4,9 +4,20 @@ apply plugin: 'java'
 version = '0.1.0.0'
 scalaVersion = '2.10.3'
 
+task specs(type: JavaExec, dependsOn: testClasses) {
+    main = 'org.specs2.files'
+    args = ['console']
+    classpath sourceSets.main.runtimeClasspath
+    classpath sourceSets.test.runtimeClasspath
+    classpath configurations.testRuntime
+    classpath configurations.runtime
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '1.4'
 }
+
+test.dependsOn specs
 
 repositories {
     mavenCentral()
