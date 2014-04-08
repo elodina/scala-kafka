@@ -36,7 +36,7 @@ dependencies {
     compile 'com.github.scopt:scopt_2.9.2:3.1.0'
     compile 'com.yammer.metrics:metrics-core:2.2.0'
     compile 'nl.grons:metrics-scala_2.9.2:3.0.3'
-    compile 'com.typesafe.akka:akka-actor:2.0.5'
+    compile group: 'com.typesafe.akka', name: 'akka-actor_2.10', version: '2.3.1'
     compile 'org.apache.thrift:libthrift:0.9.1'
     compile 'joda-time:joda-time:2.3'
     compile 'org.joda:joda-convert:1.5'
