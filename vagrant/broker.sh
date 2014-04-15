@@ -48,6 +48,7 @@ sed 's/#host.name=localhost/'host.name=$IP'/' /tmp/prop2.tmp > /tmp/prop3.tmp
 sed 's/zookeeper.connect=localhost:2181/'zookeeper.connect=192.168.86.5:2181'/' /tmp/prop3.tmp > /opt/server.properties
 
 /vagrant/vagrant/kafka.sh #install kafka
+/vagrant/vagrant/kafkacat.sh #install the kafkacat utility
 
 /opt/apache/kafka/bin/kafka-server-start.sh /opt/server.properties 1>> /tmp/broker.log 2>> /tmp/broker.log &
 
