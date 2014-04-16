@@ -88,7 +88,7 @@ case class KafkaProducer(
   props.put("metadata.broker.list", brokerList)
   props.put("batch.num.messages", batchSize.toString)
   props.put("message.send.max.retries", messageSendMaxRetries.toString)
-  props.put("require.requred.acks",requestRequiredAcks.toString)
+  props.put("request.required.acks",requestRequiredAcks.toString)
   props.put("client.id",clientId.toString)
 
   val producer = new Producer[AnyRef, AnyRef](new ProducerConfig(props))
