@@ -39,3 +39,4 @@ git clone https://github.com/edenhill/kafkacat.git
 cd /opt/github/edenhill/kafkacat
 ./bootstrap.sh
 cp kafkacat /usr/local/bin/
+exitscript
