@@ -31,7 +31,7 @@ exitscript()
 }
 
 apt-get -y update
-apt-get install -y wget git gcc g++ zlib1g-dev zlib1g make
+apt-get install -y wget git gcc g++ zlib1g-dev zlib1g make curl screen vim wget git
 mkdir -p /opt/github/edenhill
 chmod a+rw -R /opt/github/edenhill
 cd /opt/github/edenhill
