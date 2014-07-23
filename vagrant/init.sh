@@ -39,7 +39,7 @@ apt-get -y install oracle-java7-installer oracle-java7-set-default
 
 chmod a+rw -R /opt
 cd /
-ln -s /opt/stealthly/scala-kafka/vagrant vagrant
+ln -s /opt/stealthly/scala-kafka/ vagrant
 
 /vagrant/vagrant/kafka.sh #install kafka
 /vagrant/vagrant/kafkacat.sh #install the kafkacat utility
