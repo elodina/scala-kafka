@@ -30,13 +30,18 @@ exitscript()
         exit 0
 }
 
-apt-get install -y git
+apt-get -y update
+apt-get install -y software-properties-common python-software-properties curl wget git screen
+add-apt-repository -y ppa:webupd8team/java
+apt-get -y update
+/bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+apt-get -y install oracle-java7-installer oracle-java7-set-default
 
-cd /opt
-mkdir stealthly
-chmod a+rw stealthly
-cd stealthly
-git clone https://github.com/stealthly/scala-kafka.git
-cd scala-kafka/vagrant
-./init.sh
+chmod a+rw -R /opt
+cd /
+ln -s /opt/stealthly/vagrant vagrant
+
+/vagrant/vagrant/kafka.sh #install kafka
+/vagrant/vagrant/kafkacat.sh #install the kafkacat utility
+
 exitscript
