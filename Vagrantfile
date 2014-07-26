@@ -25,19 +25,27 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # doesn't already exist on the user's system.
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  config.vm.define "zookeeper" do |zookeeper|
-    zookeeper.vm.network :private_network, ip: "192.168.86.5"
-    zookeeper.vm.provider :virtualbox do |vb|
+  config.vm.define "zkbkOne" do |zkbkOne|
+    zkbkOne.vm.network :private_network, ip: "192.168.30.10"
+    zkbkOne.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end
-    zookeeper.vm.provision "shell", path: "vagrant/zk.sh"
+    zkbkOne.vm.provision "shell", path: "vagrant/init.sh"
   end
 
-  config.vm.define "brokerOne" do |brokerOne|
-    brokerOne.vm.network :private_network, ip: "192.168.86.10"
-    brokerOne.vm.provider :virtualbox do |vb|
+  config.vm.define "zkbkTwo" do |zkbkTwo|
+    zkbkTwo.vm.network :private_network, ip: "192.168.30.20"
+    zkbkTwo.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end
-    brokerOne.vm.provision "shell", path: "vagrant/broker.sh", :args => "1"
+    zkbkTwo.vm.provision "shell", path: "vagrant/init.sh", :args => "1"
   end
+
+  config.vm.define "zkbkThree" do |zkbkThree|
+    zkbkThree.vm.network :private_network, ip: "192.168.30.30"
+    zkbkThree.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "512"]
+    end
+    zkbkThree.vm.provision "shell", path: "vagrant/init.sh", :args => "1"
+  end  
 end
