@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   config.vm.define "zkbkOne" do |zkbkOne|
-    zkbkOne.vm.network :private_network, ip: "192.168.30.10"
+    zkbkOne.vm.network :private_network, ip: "192.168.30.1"
     zkbkOne.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end
@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "zkbkTwo" do |zkbkTwo|
-    zkbkTwo.vm.network :private_network, ip: "192.168.30.20"
+    zkbkTwo.vm.network :private_network, ip: "192.168.30.2"
     zkbkTwo.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end
@@ -42,7 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "zkbkThree" do |zkbkThree|
-    zkbkThree.vm.network :private_network, ip: "192.168.30.30"
+    zkbkThree.vm.network :private_network, ip: "192.168.30.3"
     zkbkThree.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end

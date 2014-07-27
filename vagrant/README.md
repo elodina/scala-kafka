@@ -5,27 +5,24 @@ Using Vagrant to get up and running.
 1) Install Vagrant [http://www.vagrantup.com/](http://www.vagrantup.com/)  
 2) Install Virtual Box [https://www.virtualbox.org/](https://www.virtualbox.org/)  
 
-In the main kafka folder
+    vagrant up --provider=virtualbox
 
-1) ./sbt update  
-2) ./sbt package  
-3) ./sbt assembly-package-dependency  
-4) vagrant up  
+```
+sudo su
+cd /vagrant/vagrant
+./up.sh
 
-once this is done 
-* Zookeeper will be running 192.168.50.5
-* Broker 1 on 192.168.50.10
-* Broker 2 on 192.168.50.20
-* Broker 3 on 192.168.50.30
+cd /opt/apache/kafka && bin/zookeeper-server-start.sh config/zookeeper.properties 1>>/tmp/zk.log 2>>/tmp/zk.log &
+cd /opt/apache/kafka && bin/kafka-server-start.sh config/server.properties 1>>/tmp/bk.log 2>>/tmp/bk.log &
 
-When you are all up and running you will be back at a command brompt.  
+bin/kafka-topics.sh --create -topic test1 --replication-factor 3 --partitions 3 --zookeeper 192.168.30.1:2181,192.168.30.2:2181,192.168.3.30:2181
 
-If you want you can login to the machines using vagrant ssh <machineName> but you don't need to.
+bin/kafka-topics.sh --describe --zookeeper 192.168.30.1:2181,192.168.30.2:2181,192.168.3.30:2181
+Topic:test1  PartitionCount:3  ReplicationFactor:3  Configs:
+  Topic: test1  Partition: 0  Leader: 1  Replicas: 1,3,2  Isr: 1,3,2
+  Topic: test1  Partition: 1  Leader: 2  Replicas: 2,1,3  Isr: 2,1,3
+  Topic: test1  Partition: 2  Leader: 3  Replicas: 3,2,1  Isr: 3,2,1
 
-You can access the brokers and zookeeper by their IP
 
-e.g.
-
-bin/kafka-console-producer.sh --broker-list 192.168.50.10:9092,192.168.50.20:9092,192.168.50.30:9092 --topic sandbox
-
-bin/kafka-console-consumer.sh --zookeeper 192.168.50.5:2181 --topic sandbox --from-beginning
+kill -9 `ps aux | grep Kafka | awk '{print $2}'`
+```
