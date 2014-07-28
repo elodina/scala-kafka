@@ -19,18 +19,18 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "precise64"
+  config.vm.box = "zkbk"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.vm.box_url = "https://s3.amazonaws.com/stealthly_vagrantbox/zkbk.box"
 
   config.vm.define "zkbkOne" do |zkbkOne|
     zkbkOne.vm.network :private_network, ip: "192.168.30.1"
     zkbkOne.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end
-    zkbkOne.vm.provision "shell", path: "vagrant/init.sh"
+    #zkbkOne.vm.provision "shell", path: "vagrant/init.sh"
   end
 
   config.vm.define "zkbkTwo" do |zkbkTwo|
@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     zkbkTwo.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end
-    zkbkTwo.vm.provision "shell", path: "vagrant/init.sh", :args => "1"
+    #zkbkTwo.vm.provision "shell", path: "vagrant/init.sh", :args => "1"
   end
 
   config.vm.define "zkbkThree" do |zkbkThree|
@@ -46,6 +46,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     zkbkThree.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", "512"]
     end
-    zkbkThree.vm.provision "shell", path: "vagrant/init.sh", :args => "1"
+    #zkbkThree.vm.provision "shell", path: "vagrant/init.sh", :args => "1"
   end  
 end
