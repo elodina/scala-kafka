@@ -97,7 +97,7 @@ case class KafkaProducer(
      if (partition == null) {
        new KeyedMessage(topic,message)
      } else {
-       new KeyedMessage(topic,message, partition)
+       new KeyedMessage(topic,partition,message)
      }
   }
   
