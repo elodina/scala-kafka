@@ -1,8 +1,31 @@
 apply plugin: 'scala'
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 version = '0.1.0.0'
 scalaVersion = '2.10.3'
+
+configurations {
+    deployerJars
+}
+
+apply from: "maven.gradle"
+uploadArchives {
+    signing {
+        sign configurations.archives
+        repositories.mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            pom.groupId = 'ly.stealth'
+            pom.artifactId = 'scala-kafka'
+            pom.version = version
+            configuration = configurations.deployerJars
+            repository(url: "${mavenRepoUrl}") {
+                authentication(userName: "${mavenUser}", password: "${mavenPassword}")
+            }
+        }
+    }
+}
 
 task specs(type: JavaExec, dependsOn: testClasses) {
     main = 'org.specs2.files'
@@ -14,7 +37,7 @@ task specs(type: JavaExec, dependsOn: testClasses) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.4'
+    gradleVersion = '2.0'
 }
 
 test.dependsOn specs
@@ -41,4 +64,6 @@ dependencies {
     compile 'joda-time:joda-time:2.3'
     compile 'org.joda:joda-convert:1.5'
     testCompile 'org.specs2:specs2_2.10:2.2.2'
+
+    deployerJars "org.apache.maven.wagon:wagon-http:2.2"
 }

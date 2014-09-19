@@ -1,0 +1,3 @@
+def mavenRepoUrl = ""
+def mavenUser = ""
+def mavenPassword = ""
