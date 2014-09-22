@@ -3,6 +3,12 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
+ext {
+    mavenURL = ""
+    mavenUsername = ""
+    mavenPassword = ""
+}
+
 version = '0.1.0.0'
 scalaVersion = '2.10.3'
 
@@ -20,8 +26,8 @@ uploadArchives {
             pom.artifactId = 'scala-kafka'
             pom.version = version
             configuration = configurations.deployerJars
-            repository(url: "${mavenRepoUrl}") {
-                authentication(userName: "${mavenUser}", password: "${mavenPassword}")
+            repository(url: "${mavenURL}") {
+                authentication(userName: "${mavenUsername}", password: "${mavenPassword}")
             }
         }
     }
