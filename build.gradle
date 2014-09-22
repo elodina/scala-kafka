@@ -4,7 +4,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 version = '0.1.0.0'
-scalaVersion = '2.10.3'
+def scalaVersion = '2.10.3'
 
 configurations {
     deployerJars
@@ -18,6 +18,18 @@ uploadArchives {
             pom.groupId = 'ly.stealth'
             pom.artifactId = 'scala-kafka'
             pom.version = version
+            pom.project {
+                name 'Scala Kafka'
+                packaging 'jar'
+                url 'http://github.com/stealthly/scala-kafka'
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+            }
             configuration = configurations.deployerJars
             repository(url: "${mavenURL}") {
                 authentication(userName: "${mavenUsername}", password: "${mavenPassword}")
