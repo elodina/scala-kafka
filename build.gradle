@@ -16,7 +16,6 @@ configurations {
     deployerJars
 }
 
-apply from: "maven.gradle"
 uploadArchives {
     signing {
         sign configurations.archives
