@@ -38,6 +38,29 @@ uploadArchives {
     }
 }
 
+tasks.withType(Javadoc) {
+    task srcJar(type:Jar) {
+        classifier = 'sources'
+        from '../LICENSE'
+        from '../NOTICE'
+        from sourceSets.main.java
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier 'javadoc'
+        from '../LICENSE'
+        from '../NOTICE'
+        from javadoc.destinationDir
+    }
+
+    task docsJar(type: Jar, dependsOn: javadocJar) { }
+
+    artifacts {
+        archives srcJar
+        archives javadocJar
+    }
+}
+
 task specs(type: JavaExec, dependsOn: testClasses) {
     main = 'org.specs2.files'
     args = ['console']
