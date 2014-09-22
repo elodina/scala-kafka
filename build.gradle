@@ -38,11 +38,12 @@ uploadArchives {
     }
 }
 
-tasks.withType(Javadoc) {
+tasks.withType(ScalaDoc) {
     task srcJar(type:Jar) {
         classifier = 'sources'
         from '../LICENSE'
-        from sourceSets.main.java
+        from '../NOTICE'
+        from sourceSets.main.scala
     }
 
     task javadocJar(type: Jar, dependsOn: javadoc) {
