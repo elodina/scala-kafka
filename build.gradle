@@ -42,14 +42,12 @@ tasks.withType(Javadoc) {
     task srcJar(type:Jar) {
         classifier = 'sources'
         from '../LICENSE'
-        from '../NOTICE'
         from sourceSets.main.java
     }
 
     task javadocJar(type: Jar, dependsOn: javadoc) {
         classifier 'javadoc'
         from '../LICENSE'
-        from '../NOTICE'
         from javadoc.destinationDir
     }
 
