@@ -22,6 +22,7 @@ uploadArchives {
                 name 'Scala Kafka'
                 packaging 'jar'
                 url 'http://github.com/stealthly/scala-kafka'
+                description 'Quick up and running using Scala for Apache Kafka'
                 scm {
                     url 'http://github.com/stealthly/scala-kafka'
                     connection 'scm:https://github.com/stealthly/scala-kafka'
