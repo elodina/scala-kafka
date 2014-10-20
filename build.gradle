@@ -86,6 +86,25 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
 
+task scalago(type: Jar) {
+    dependsOn compileJava, compileScala, processResources, classes
+
+    def mainClassName = "scalago.ScalaGoKafka"
+
+    jar {
+        doFirst {
+            from(configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }) {
+                exclude "META-INF/*.SF"
+                exclude "META-INF/*.DSA"
+                exclude "META-INF/*.RSA"
+                exclude "org/apache/storm/*"
+                exclude "defaults.yaml"
+            }
+        }
+        manifest.attributes("Main-Class": mainClassName)
+    }
+}
+
 test.dependsOn specs
 
 repositories {
