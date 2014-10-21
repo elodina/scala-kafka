@@ -1,12 +1,13 @@
 package scalago
 
-import java.io.{FileOutputStream, ByteArrayOutputStream}
+import java.io.{File, ByteArrayOutputStream}
 import java.nio.ByteBuffer
+import java.util.UUID
 import kafka.consumer.KafkaConsumer
 import kafka.producer.KafkaProducer
-import org.apache.avro.generic.{GenericDatumWriter, IndexedRecord}
-import org.apache.avro.io.EncoderFactory
-import org.apache.avro.specific.{SpecificDatumWriter, SpecificRecord}
+import org.apache.avro.Schema
+import org.apache.avro.generic.{GenericDatumReader, GenericData, GenericRecord, GenericDatumWriter}
+import org.apache.avro.io.{DecoderFactory, EncoderFactory}
 
 object ScalaGoKafka {
   var readTopic: String = null
@@ -16,15 +17,24 @@ object ScalaGoKafka {
   val broker = "localhost:9092"
   val zookeeper = "localhost:2181"
 
-  val pingPong = new PingPong(1, s"ping-pong-${System.currentTimeMillis()}")
   lazy val producer = new KafkaProducer(writeTopic, broker)
+  new File(".").list().foreach(println)
 
-  def main(args: Array[String]) = {
+  val schemaRegistry = Map(0 -> new Schema.Parser().parse(getClass.getResourceAsStream("/scalago.avsc")))
+
+  def main(args: Array[String]) {
     parseArgs(args)
 
     println("scala  > Started!")
-    producer.send(AvroWrapper.encode(pingPong), null)
-    pingPongLoop(pingPong)
+
+    val schemaId = 0
+    val rec = new GenericData.Record(schemaRegistry.get(schemaId).get)
+    rec.put("counter", 1L)
+    rec.put("name", s"ping-pong-${System.currentTimeMillis()}")
+    rec.put("uuid", UUID.randomUUID().toString)
+
+    producer.send(AvroWrapper.encode(rec, schemaId), null)
+    pingPongLoop(schemaId)
   }
 
   def parseArgs(args: Array[String]) {
@@ -37,43 +47,62 @@ object ScalaGoKafka {
     writeTopic = args(1)
   }
 
-  def pingPongLoop(obj: PingPong) {
+  def pingPongLoop(schemaId: Int) {
     var message: Array[Byte] = null
     while (true) {
       val consumer = new KafkaConsumer(readTopic, group, zookeeper)
       consumer.read(bytes => {
         Thread.sleep(2000)
-        println("scala  > received " + new String(bytes))
         message = bytes
         consumer.close()
       })
 
-      pingPong.setCounter(new String(message).toLong + 1)
-      producer.send(AvroWrapper.encode(pingPong), null)
+      val record = AvroWrapper.decode(message)
+      println("scala  > received " + record)
+      modify(record)
+      producer.send(AvroWrapper.encode(record, schemaId), null)
     }
+  }
+
+  def modify(rec: GenericRecord) {
+    rec.put("counter", rec.get("counter").asInstanceOf[Long] + 1)
+    rec.put("uuid", UUID.randomUUID().toString)
   }
 }
 
 object AvroWrapper {
   final val MAGIC = Array[Byte](0x0)
 
-  def encode(obj: IndexedRecord): Array[Byte] = {
+  def encode(obj: GenericRecord, schemaId: Int): Array[Byte] = {
     val out = new ByteArrayOutputStream()
     out.write(MAGIC)
-    out.write(ByteBuffer.allocate(4).putInt(0).array())
+    out.write(ByteBuffer.allocate(4).putInt(schemaId).array())
 
     val encoder = EncoderFactory.get().directBinaryEncoder(out, null)
-    val writer = if (obj.isInstanceOf[SpecificRecord])
-      new SpecificDatumWriter[IndexedRecord](obj.getSchema)
-    else new GenericDatumWriter[IndexedRecord](obj.getSchema)
+    val schemaOpt = ScalaGoKafka.schemaRegistry.get(schemaId)
+    if (schemaOpt.isEmpty) throw new IllegalArgumentException("Invalid schema id")
 
+    val writer = new GenericDatumWriter[GenericRecord](schemaOpt.get)
     writer.write(obj, encoder)
 
-    //just for debug
-    val fos = new FileOutputStream("out.avro")
-    fos.write(out.toByteArray)
-    fos.close()
-
     out.toByteArray
+  }
+
+  def decode(bytes: Array[Byte]): GenericRecord = {
+    val decoder = DecoderFactory.get().binaryDecoder(bytes, null)
+    val magic = new Array[Byte](1)
+    decoder.readFixed(magic)
+    if (magic.deep != MAGIC.deep) throw new IllegalArgumentException("Not a camus byte array")
+
+    val schemaIdArray = new Array[Byte](4)
+    decoder.readFixed(schemaIdArray)
+
+    val schemaOpt = ScalaGoKafka.schemaRegistry.get(ByteBuffer.wrap(schemaIdArray).getInt)
+    schemaOpt match {
+      case None => throw new IllegalArgumentException("Invalid schema id")
+      case Some(schema) =>
+        val reader = new GenericDatumReader[GenericRecord](schema)
+        reader.read(null, decoder)
+    }
   }
 }
