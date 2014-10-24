@@ -28,3 +28,15 @@ bin/kafka-console-producer.sh --broker-list 192.168.86.10:9092 --topic <get his 
 
 bin/kafka-console-consumer.sh --zookeeper 192.168.86.5:2181 --topic <get his from the random topic created in test> --from-beginning
 
+scala-go-kafka
+===========
+
+Scala-kafka and go-kafka working together
+
+Install Docker [https://docs.docker.com/installation/#installation](https://docs.docker.com/installation/#installation)  
+
+In the main scala-kafka folder  
+
+1) ./gradlew scalago jar    
+2) ./start-scala-go.sh
+3) ./stop-scala-go.sh to stop
