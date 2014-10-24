@@ -32,11 +32,11 @@ exitscript()
 
 mkdir -p /opt/apache
 cd /opt/apache
-version=0.8.1.1
+version="kafka-0.8.2-beta-candidate1" #0.8.1.1
 scala=2.10
-release=kafka_$scala-$version
+release="kafka_2.10-0.8.2-beta" #kafka_$scala-$version
 
-url=archive.apache.org/dist/kafka
+url="people.apache.org/~joestein" #archive.apache.org/dist/kafka
 wget https://$url/$version/$release.tgz
 wget https://$url/$version/$release.tgz.md5
 wget https://$url/$version/$release.tgz.sh1
