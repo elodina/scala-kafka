@@ -1,6 +1,6 @@
 package scalago
 
-import java.io.{File, ByteArrayOutputStream}
+import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
 import java.util.UUID
 import kafka.consumer.KafkaConsumer
@@ -18,7 +18,6 @@ object ScalaGoKafka {
   val zookeeper = "localhost:2181"
 
   lazy val producer = new KafkaProducer(writeTopic, broker)
-  new File(".").list().foreach(println)
 
   val schemaRegistry = Map(0 -> new Schema.Parser().parse(getClass.getResourceAsStream("/scalago.avsc")))
 
