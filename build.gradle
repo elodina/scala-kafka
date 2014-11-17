@@ -73,6 +73,8 @@ tasks.withType(ScalaDoc) {
     }
 }
 
+tasks.withType(ScalaCompile) { scalaCompileOptions.useAnt = false }
+
 task specs(type: JavaExec, dependsOn: testClasses) {
     main = 'org.specs2.files'
     args = ['console']
@@ -116,6 +118,7 @@ repositories {
 }
 
 dependencies {
+    scalaTools "org.scala-lang:scala-compiler:$scalaVersion"
     compile 'org.scala-lang:scala-library:$scalaVersion'
     compile 'org.apache.kafka:kafka_2.10:0.8.2-beta'
     compile 'com.101tec:zkclient:0.3'
