@@ -129,7 +129,7 @@ dependencies {
     compile 'org.apache.thrift:libthrift:0.9.1'
     compile 'joda-time:joda-time:2.3'
     compile 'org.joda:joda-convert:1.5'
-    compile 'com.sclasen:akka-kafka_2.10:0.0.9-0.8.2-beta-SNAPSHOT'
+    compile 'com.sclasen:akka-kafka_2.10:0.0.10'
     compile 'com.typesafe.akka:akka-slf4j_2.10:2.3.1'
     compile 'com.typesafe.akka:akka-testkit_2.10:2.3.1'
     compile 'org.slf4j:log4j-over-slf4j:1.6.6'
