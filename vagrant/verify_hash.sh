@@ -31,7 +31,7 @@ exitscript()
 }
 
 hs=$(gpg --print-md $2 $1)
-hf=$(cat $1.$3)
+hf=$(cat /vagrant/checks/$1.$3)
 if [ "$hs" == "$hf" ]; then
   echo "$2 ok"
 else
