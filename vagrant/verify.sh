@@ -32,6 +32,7 @@ exitscript()
 
 release=$1
 
+gpg --import /vagrant/KEYS
 gpg --verify $release.asc $release
 
 /vagrant/vagrant/verify_hash.sh $release MD5 md5
