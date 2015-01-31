@@ -36,7 +36,7 @@ version=0.8.2.0
 scala=2.10
 release=kafka_$scala-$version
 
-url=people.apache.org/~junrao/kafka-0.8.2.0-candidate2 #archive.apache.org/dist/kafka
+url=people.apache.org/~junrao/kafka-0.8.2.0-candidate3 #archive.apache.org/dist/kafka
 wget https://$url/$release.tgz
 wget https://$url/$release.tgz.md5
 wget https://$url//$release.tgz.sha1
