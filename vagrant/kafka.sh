@@ -32,16 +32,16 @@ exitscript()
 
 mkdir -p /opt/apache
 cd /opt/apache
-version=0.8.2-beta
+version=0.8.2.0
 scala=2.10
 release=kafka_$scala-$version
 
 url=archive.apache.org/dist/kafka
-wget https://$url/$version/$release.tgz
-wget https://$url/$version/$release.tgz.md5
-wget https://$url/$version/$release.tgz.sh1
-wget https://$url/$version/$release.tgz.sh2
-wget https://$url/$version/$release.tgz.asc
+wget https://$url/$release.tgz
+wget https://$url/$release.tgz.md5
+wget https://$url//$release.tgz.sha1
+wget https://$url/$release.tgz.sha2
+wget https://$url/$release.tgz.asc
 tar -xvf $release.tgz
 /vagrant/vagrant/verify.sh $release.tgz
 ln -s /opt/apache/$release kafka
