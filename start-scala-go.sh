@@ -8,6 +8,7 @@ then
 else
     echo "Starting Zookeeper"
     docker run --net=host --name zkserver -d stealthly/docker-zookeeper
+    sleep 5
 fi
 
 ID=1
@@ -15,6 +16,12 @@ PORT=9092
 HOST_IP=localhost
 
 docker run --net=host --name=broker$ID -p $PORT:$PORT -e BROKER_ID=$ID -e HOST_IP=$HOST_IP -e PORT=$PORT -d stealthly/docker-kafka
+sleep 5
+IMAGE=$(docker images | grep "stealthly/confluent-platform " |  awk '{print $3}')
+if [ -z $IMAGE ]; then
+    docker build -t stealthly/confluent-platform .
+fi
+docker run --name registry -d --net=host -p 8081:8081 stealthly/confluent-platform
 
 #let kafka initialize properly before establishing producers and consumers
 sleep 10
