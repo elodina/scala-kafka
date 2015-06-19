@@ -87,7 +87,7 @@ task specs(type: JavaExec, dependsOn: testClasses) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
+    gradleVersion = '2.3'
 }
 
 task scalago(type: Jar) {
@@ -121,7 +121,7 @@ repositories {
 }
 
 dependencies {
-    scalaTools "org.scala-lang:scala-compiler:$scalaVersion"
+    compile "org.scala-lang:scala-compiler:$scalaVersion"
     compile 'org.scala-lang:scala-library:$scalaVersion'
     compile 'org.apache.kafka:kafka_2.10:0.8.2.1'
     compile 'com.101tec:zkclient:0.3'
