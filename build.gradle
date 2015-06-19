@@ -51,6 +51,8 @@ uploadArchives {
     }
 }
 
+tasks.withType(ScalaCompile) { scalaCompileOptions.useAnt = false }
+
 tasks.withType(ScalaDoc) {
     task srcJar(type:Jar) {
         classifier = 'sources'
