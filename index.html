@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Scala-kafka by stealthly</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/stealthly/scala-kafka">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/stealthly/scala-kafka/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/stealthly/scala-kafka/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Scala-kafka</h1>
+          <p>Quick up and running using Scala for Apache Kafka</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/stealthly">stealthly</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="scala-kafka" class="anchor" href="#scala-kafka" aria-hidden="true"><span class="octicon octicon-link"></span></a>scala-kafka</h1>
+
+<p>Quick up and running using Scala for Apache Kafka</p>
+
+<p>Use Vagrant to get up and running.</p>
+
+<p>1) Install Vagrant <a href="http://www.vagrantup.com/">http://www.vagrantup.com/</a><br>
+2) Install Virtual Box <a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a>  </p>
+
+<p>In the main kafka folder  </p>
+
+<p>1) vagrant up<br>
+2) ./gradlew test</p>
+
+<p>once this is done </p>
+
+<ul>
+<li>Zookeeper will be running 192.168.86.5</li>
+<li>Broker 1 on 192.168.86.10</li>
+<li>All the tests in src/test/scala/* should pass<br>
+</li>
+</ul>
+
+<p>If you want you can login to the machines using vagrant ssh  but you don't need to.</p>
+
+<p>You can access the brokers and zookeeper by their IP from your local without having to go into vm.</p>
+
+<p>e.g.</p>
+
+<p>bin/kafka-console-producer.sh --broker-list 192.168.86.10:9092 --topic </p>
+
+<p>bin/kafka-console-consumer.sh --zookeeper 192.168.86.5:2181 --topic  --from-beginning</p>
+
+<h1>
+<a id="scala-go-kafka" class="anchor" href="#scala-go-kafka" aria-hidden="true"><span class="octicon octicon-link"></span></a>scala-go-kafka</h1>
+
+<p>Scala-kafka and Go-kafka working together using Apache Avro and Schema Registry</p>
+
+<p>Install Docker <a href="https://docs.docker.com/installation/#installation">https://docs.docker.com/installation/#installation</a>  </p>
+
+<p>In the main scala-kafka folder  </p>
+
+<p>1) ./gradlew scalago jar<br>
+2) ./start-scala-go.sh<br>
+3) ./stop-scala-go.sh    </p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
