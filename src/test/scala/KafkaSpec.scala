@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package ly.stealth.testing
+package net.elodina.testing
 
 import java.util.concurrent.{ExecutionException, TimeUnit}
 

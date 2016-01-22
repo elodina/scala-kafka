@@ -21,12 +21,12 @@ uploadArchives {
             pom.project {
                 name 'Scala Kafka'
                 packaging 'jar'
-                url 'http://github.com/stealthly/scala-kafka'
+                url 'http://github.com/elodina/scala-kafka'
                 description 'Quick up and running using Scala for Apache Kafka'
                 scm {
-                    url 'http://github.com/stealthly/scala-kafka'
-                    connection 'scm:https://github.com/stealthly/scala-kafka'
-                    developerConnection 'scm:git:git://github.com/stealthly/scala-kafka'
+                    url 'http://github.com/elodina/scala-kafka'
+                    connection 'scm:https://github.com/elodina/scala-kafka'
+                    developerConnection 'scm:git:git://github.com/elodina/scala-kafka'
                 }
                 licenses {
                     license {

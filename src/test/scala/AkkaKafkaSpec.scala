@@ -1,4 +1,4 @@
-package ly.stealth.testing
+package net.elodina.testing
 
 import akka.actor._
 import akka.util.Timeout
