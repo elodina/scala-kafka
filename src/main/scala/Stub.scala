@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
- package ly.stealth.testing
+package net.elodina.testing
 
 object Stub {
 	def main(args: Array[String]) = {

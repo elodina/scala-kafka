@@ -33,10 +33,10 @@ exitscript()
 apt-get install -y git
 
 cd /opt
-mkdir stealthly
-chmod a+rw stealthly
-cd stealthly
-git clone https://github.com/stealthly/scala-kafka.git
+mkdir elodina
+chmod a+rw elodina
+cd elodina
+git clone https://github.com/elodina/scala-kafka.git
 cd scala-kafka/vagrant
 ./init.sh
 
